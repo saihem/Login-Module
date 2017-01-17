@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container theme-showcase" role="main">
+{% if username_exists %}
+  <div class="alert alert-danger" role="alert">
+  <strong>Username {{username_exists}} Exists!</strong>
+  </div>
+{% endif %}
 <h1>Register as a new user!</h1>
 {% if registered %}
 <strong>thank you for registering!</strong>
-<a href="/rango/">Return to the homepage.</a><br />
+<a href="{% url 'login' %}">Return to the homepage.</a><br />
 {% else %}
 <form class="form-horizontal"  method="post" action="{% url 'register' %}" enctype="multipart/form-data">
     {% csrf_token %}

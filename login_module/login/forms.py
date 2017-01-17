@@ -1,11 +1,11 @@
 from django import forms
+
 from login.models import UserProfile
 # from django.contrib.auth.models import User
 
-
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True)
-    password = forms.CharField(required=True,min_length=8,widget=forms.PasswordInput())
+    username = forms.CharField(label="Username", required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username'}))
+    password = forms.CharField(label="Password", min_length=8, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'password'}))
     # def __init__(self, *args, **kwargs):
     #     super(LoginForm, self).__init__(*args, **kwargs)
     #     self.fields['name'].widget.attrs['class'] = 'form-control'
