@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+
+  <!-- <form class="form-signin" method="post" name="loginform" action="{% url 'login' %}">
+    <h2 class="form-signin-heading">Please sign in</h2>
+
+    <label for="username" class="sr-only">Username</label>
+    <input  type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form> -->
+
+  <form class="form-signin" method="post" id="loginform" name="loginform">
+      {% csrf_token %}
+          {% for field in form %}
+                        <label for="{{field.name}}"  class="sr-only">{{ field.label }} </label>
+                        <div class="controls">
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="" style="margin: 10px auto;">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                {% endfor %}
+                  <button class="btn btn-lg btn-primary btn-block" type="submit"> Sign in </button>
+  </form>
+  <h4 class = "float-right"> Are you a new user? Register <a href="{% url 'register' %}" >here!</a></h4>
+
+</div> <!-- /container -->
+{% endblock %}
