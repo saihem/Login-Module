@@ -7,8 +7,6 @@ class UserProfileInstanceResource(object):
         username = kwargs.get("username", None)
         password = kwargs.get("password", None)
         user = User.objects.create_user(username=username, password=password)
-        # user.password = password
-        # user.username = username
         user.save()
         user_profile = UserProfile(user=user, name=name, username=username)
         user_profile.save()

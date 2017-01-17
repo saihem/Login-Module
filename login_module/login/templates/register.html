@@ -1,21 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container theme-showcase" role="main">
-{% if username_exists %}
-  <div class="alert alert-danger" role="alert">
-  <strong>Username {{username_exists}} Exists!</strong>
-  </div>
-{% endif %}
-<h1>Register as a new user!</h1>
-{% if registered %}
-<strong>thank you for registering!</strong>
-<a href="{% url 'login' %}">Return to the homepage.</a><br />
-{% else %}
-<form class="form-horizontal"  method="post" action="{% url 'register' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="submit" value="Register" />
-</form>
-{% endif %}
+  <div class="page-header">
+    {% if username_exists %}
+      <div class="alert alert-danger" role="alert">
+      <strong>Username {{username_exists}} Exists!</strong>
+      </div>
+    {% endif %}
+  <h1>Register as a new user!</h1>
+  <form class="form-signin"  method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+    {% for field in form %}
+        <div class="control-group">
+            <label class="control-label ">{{ field.label }} </label>
+            <div class="controls">
+                {{ field }}
+                {% if field.errors %}
+                    <div class="" style="margin: 10px auto;">
+                        {{ field.errors }}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                          </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+      <input type="submit" name="submit" value="Register"  class="btn btn-md btn-primary" />
+  </form>
+</div>
 </div>
 {% endblock %}

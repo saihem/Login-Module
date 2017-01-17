@@ -12,7 +12,6 @@ from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-
 # Login
 from login.forms import LoginForm, UserForm
 from login.api import UserProfileInstanceResource
@@ -21,13 +20,6 @@ from login.models import UserProfile
 
 # Requests
 import requests
-
-print "ALL OBS", UserProfile.objects.all()
-for user in UserProfile.objects.all():
-    print user.user, "username" , user.user.username,
-    print "name", user.name
-    print user.username
-    print user.user.password
 
 class LoginView(TemplateResponseMixin,View):
     template_name = "login.html"
@@ -90,7 +82,6 @@ class RegisterView(FormView):
     form_class = UserForm
 
     def get(self, *args, **kwargs):
-        print "in register view"
         form = self.form_class(self.request.POST)
         return super(RegisterView, self).get(self, *args, **kwargs)
 
