@@ -1,24 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-
-  <!-- <form class="form-signin" method="post" name="loginform" action="{% url 'login' %}">
-    <h2 class="form-signin-heading">Please sign in</h2>
-
-    <label for="username" class="sr-only">Username</label>
-    <input  type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form> -->
   {% if request.GET.next %}
         <p>Your account doesn't have access to this page. To proceed,
             please login with an account that has access.</p>
    {% endif %}
   {% if request.GET.error %}
         <div class="alert alert-danger" role="alert">
-        <strong>User does not exist!</strong>
+          <strong>User does not exist!</strong>
         <a href="{% url 'register' %}">Please Register</a></div>
+  {% endif %}
+  {% if request.GET.success %}
+        <div class="alert alert-success" role="alert">
+          <strong>Sucessfully created a user!</strong> Please log in below.
+        </div>
   {% endif %}
   <form class="form-signin" method="post" id="loginform" name="loginform" action="{% url 'login' %}">
       {% csrf_token %}
